@@ -4,8 +4,8 @@ const scrapeEvents = require('../services/scraper');
 const startScheduler = () => {
     // Run every day at midnight (0 0 * * *)
     // For demo purposes, we can run it every hour (0 * * * *)
-    // Run every 30 minutes to ensure near real-time updates
-    cron.schedule('*/30 * * * *', () => {
+    // Run every 9 minutes to ensure near real-time updates and keep 'Updated ago' < 10 mins
+    cron.schedule('*/9 * * * *', () => {
         console.log('Running scheduled scrape job...');
         scrapeEvents();
     });
