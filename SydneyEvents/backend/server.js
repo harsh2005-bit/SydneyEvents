@@ -18,10 +18,20 @@ const app = express();
 connectDB();
 
 // Middleware
+const allowedOrigins = ['http://localhost:5173', 'https://enjoyeventsatsydney.vercel.app'];
+
 app.use(cors({
-    origin: 'http://localhost:5173', // Frontend URL
+    origin: function (origin, callback) {
+        if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
     credentials: true
 }));
+
+app.set('trust proxy', 1); // Trust first proxy (Vercel)
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
