@@ -3,16 +3,11 @@
   "rewrites": [
     {
       "source": "/api/(.*)",
-      "destination": "/SydneyEvents/backend/server.js"
+      "destination": "/api/index.js"
     },
     {
       "source": "/(.*)",
       "destination": "/SydneyEvents/frontend/$1"
     }
-  ],
-   "functions": {
-    "SydneyEvents/backend/server.js": {
-      "maxDuration": 10
-    }
-  }
+  ]
 }
