@@ -12,7 +12,7 @@ const SubscriptionModal = ({ isOpen, onClose, event }) => {
         e.preventDefault();
         setLoading(true);
         try {
-            await axios.post('http://localhost:5000/api/events/subscribe', {
+            await axios.post('/api/events/subscribe', {
                 email,
                 eventId: event._id,
                 sourceUrl: event.originalUrl

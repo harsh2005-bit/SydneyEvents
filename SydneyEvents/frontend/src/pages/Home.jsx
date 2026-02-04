@@ -50,7 +50,7 @@ const Home = () => {
 
     const fetchMetadata = async () => {
         try {
-            const res = await axios.get('http://localhost:5000/api/events/metadata');
+            const res = await axios.get('/api/events/metadata');
             setLastUpdated(res.data.lastUpdated);
         } catch (err) {
             console.error('Failed to fetch metadata', err);
@@ -64,7 +64,7 @@ const Home = () => {
             if (filters.keyword) params.append('keyword', filters.keyword);
             if (filters.city) params.append('city', filters.city);
             
-            const res = await axios.get('http://localhost:5000/api/events', { params });
+            const res = await axios.get('/api/events', { params });
             setEvents(res.data);
             setError(null);
         } catch (err) {

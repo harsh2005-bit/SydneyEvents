@@ -28,14 +28,14 @@ const Dashboard = () => {
     const fetchEvents = async () => {
         setLoading(true);
         try {
-            const res = await axios.get('http://localhost:5000/api/admin/events', {
+            const res = await axios.get('/api/admin/events', {
                 params: filters
             });
             setEvents(res.data);
         } catch (error) {
             if(error.response && error.response.status === 401) {
                 // Not logged in
-                window.location.href = 'http://localhost:5000/auth/google';
+                window.location.href = '/auth/google';
             } else {
                 console.error(error);
             }
@@ -46,7 +46,7 @@ const Dashboard = () => {
 
     const handleImport = async (id) => {
         try {
-            const res = await axios.put(`http://localhost:5000/api/admin/events/${id}/import`, {
+            const res = await axios.put(`/api/admin/events/${id}/import`, {
                 notes: 'Manual import via dashboard'
             });
             setEvents(events.map(e => e._id === id ? res.data : e));

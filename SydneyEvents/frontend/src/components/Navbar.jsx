@@ -13,7 +13,7 @@ const Navbar = () => {
         // Fetch current user status
         const checkUser = async () => {
             try {
-                const res = await axios.get('http://localhost:5000/auth/current_user', { withCredentials: true });
+                const res = await axios.get('/auth/current_user', { withCredentials: true });
                 setUser(res.data);
             } catch (err) {
                 // Not logged in or error
@@ -86,7 +86,7 @@ const Navbar = () => {
                                             <span>Dashboard</span>
                                         </Link>
                                         <a 
-                                            href="http://localhost:5000/auth/logout" 
+                                            href="/auth/logout" 
                                             className="px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition flex items-center space-x-2 w-full text-left"
                                         >
                                             <LogOut className="w-4 h-4" />
@@ -98,7 +98,7 @@ const Navbar = () => {
                         </div>
                     ) : (
                         <a 
-                            href="http://localhost:5000/auth/google" 
+                            href="/auth/google" 
                             className="bg-slate-900 hover:bg-slate-800 text-white px-4 py-2 rounded-lg text-sm font-medium transition shadow-sm flex items-center space-x-2"
                         >
                             <User className="w-4 h-4" />
