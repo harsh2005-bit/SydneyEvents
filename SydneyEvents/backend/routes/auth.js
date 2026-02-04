@@ -11,7 +11,8 @@ router.get('/google/callback',
   (req, res) => {
     // Successful authentication, redirect to dashboard.
     // In dev, frontend is on 5173. 
-    res.redirect('http://localhost:5173/dashboard');
+    // In production, we are on same domain. Use relative path or root-relative.
+    res.redirect('/dashboard');
   }
 );
 
@@ -22,7 +23,7 @@ router.get('/logout', (req, res, next) => {
       req.session.destroy((err) => {
         if (err) console.log("Session destroy error", err);
         res.clearCookie('connect.sid'); // Default session cookie name
-        res.redirect('http://localhost:5173/');
+        res.redirect('/');
       });
   });
 });
