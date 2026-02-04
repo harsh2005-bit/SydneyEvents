@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import EventCard from '../components/EventCard';
 import SubscriptionModal from '../components/SubscriptionModal';
-import { Search, MapPin, CalendarX, AlertCircle, Loader2, Music, Beer, Palette, Briefcase, Heart, Tent, Mic2, Film, RefreshCw } from 'lucide-react';
+import { Search, MapPin, CalendarX, AlertCircle, Loader2, Music, Beer, Palette, Briefcase, Heart, Tent, Mic2, Film } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { formatDistanceToNow } from 'date-fns';
+
 
 const SkeletonCard = () => (
     <div className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden h-full flex flex-col">
@@ -41,21 +41,13 @@ const Home = () => {
     const [filters, setFilters] = useState({ keyword: '', city: 'Sydney' });
     const [activeCategory, setActiveCategory] = useState(null);
 
-    const [lastUpdated, setLastUpdated] = useState(null);
+
 
     useEffect(() => {
         fetchEvents();
-        fetchMetadata();
     }, [filters]);
 
-    const fetchMetadata = async () => {
-        try {
-            const res = await axios.get('/api/events/metadata');
-            setLastUpdated(res.data.lastUpdated);
-        } catch (err) {
-            console.error('Failed to fetch metadata', err);
-        }
-    };
+
     
     const fetchEvents = async () => {
         setLoading(true);
@@ -176,22 +168,7 @@ const Home = () => {
             </div>
         </div>
         
-        {/* Last Updated Timestamp */}
-        {lastUpdated && (
-            <button 
-                onClick={() => {
-                   setLoading(true);
-                   fetchEvents();
-                   fetchMetadata();
-                }}
-                className="text-xs font-medium text-slate-500 bg-white/80 backdrop-blur-md px-3 py-1 rounded-full border border-white/40 shadow-sm pointer-events-auto hover:bg-white hover:text-blue-600 transition-colors flex items-center space-x-1.5"
-            >
-                {loading ? <Loader2 className="w-3 h-3 animate-spin"/> : <RefreshCw className="w-3 h-3" />}
-                <span>
-                    Updated {formatDistanceToNow(new Date(lastUpdated), { addSuffix: true }).replace('less than a minute', 'just now')}
-                </span>
-            </button>
-        )}
+
     </div>
 
             {/* Main Content Area */}

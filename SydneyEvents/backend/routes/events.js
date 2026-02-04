@@ -3,16 +3,7 @@ const router = express.Router();
 const Event = require('../models/Event');
 const Subscriber = require('../models/Subscriber');
 
-// Public: Get metadata (last updated)
-router.get('/metadata', async (req, res) => {
-    try {
-        const lastEvent = await Event.findOne({}, { lastScraped: 1 }).sort({ lastScraped: -1 });
-        const lastUpdated = lastEvent ? lastEvent.lastScraped : null;
-        res.json({ lastUpdated });
-    } catch (error) {
-        res.status(500).json({ message: error.message });
-    }
-});
+
 
 // Public: Get all valid events
 router.get('/', async (req, res) => {
