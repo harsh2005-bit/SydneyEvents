@@ -1,22 +1,18 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "SydneyEvents/backend/server.js",
-      "use": "@vercel/node"
-    },
-    {
-      "src": "SydneyEvents/frontend/package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "dist"
-      }
-    }
-  ],
   "rewrites": [
     {
       "source": "/api/(.*)",
       "destination": "/SydneyEvents/backend/server.js"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/SydneyEvents/frontend/$1"
     }
-  ]
+  ],
+   "functions": {
+    "SydneyEvents/backend/server.js": {
+      "maxDuration": 10
+    }
+  }
 }
